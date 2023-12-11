@@ -4,12 +4,10 @@ import 'package:iconsax/iconsax.dart';
 import 'package:zenshop/common/styles/spacing_styles.dart';
 import 'package:zenshop/features/authentication/screens/login/widgets/login_form.dart';
 import 'package:zenshop/features/authentication/screens/login/widgets/login_header.dart';
-import 'package:zenshop/utils/constants/image_strings.dart';
 import 'package:zenshop/utils/helpers/helper_functions.dart';
 import 'package:zenshop/utils/constants/text_strings.dart';
 import '../../../../common/widgets/login_signup/form_divider.dart';
 import '../../../../common/widgets/login_signup/social_buttons.dart';
-import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 
 class LoginScreen extends StatelessWidget {

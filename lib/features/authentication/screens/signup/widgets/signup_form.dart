@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:zenshop/features/authentication/screens/signup/widgets/terms_conditions_checkbox.dart';
+import 'package:zenshop/features/authentication/screens/signup/widgets/verify_email.dart';
 
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
@@ -14,7 +17,6 @@ class TSignupForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Form(
       child: Column(
         children: [
@@ -92,7 +94,7 @@ class TSignupForm extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () => Get.to(() => const VerifyEmailScreen()),
               child: const Text(TTexts.createAccount),
             ),
           ),
@@ -101,4 +103,3 @@ class TSignupForm extends StatelessWidget {
     );
   }
 }
-
