@@ -1,13 +1,12 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:zenshop/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:zenshop/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:zenshop/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:zenshop/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:zenshop/utils/constants/sizes.dart';
 import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
-import '../../../../common/widgets/images/t_rounded_image.dart';
+import '../../../../common/widgets/layouts/grid_layout.dart';
+import '../../../../common/widgets/products/product_cards/product_card_vertical.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../utils/constants/image_strings.dart';
 
@@ -16,7 +15,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -48,15 +47,29 @@ class HomeScreen extends StatelessWidget {
                         THomeCategories(),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
 
             ///Body --
             Padding(
-              padding: EdgeInsets.all(TSizes.defaultSpace),
-              child: TPromoSlider(banners: [TImages.promoBanner1,TImages.promoBanner2,TImages.promoBanner3],),
+              padding: const EdgeInsets.all(TSizes.defaultSpace),
+              child: Column(
+                children: [
+                  const TPromoSlider(banners: [
+                    TImages.promoBanner1,
+                    TImages.promoBanner2,
+                    TImages.promoBanner3
+                  ]),
+                  SizedBox(height: TSizes.spaceBtwSections),
+
+                  /// -- popular products
+                  TGridLayout(
+                      itemCount: 2,
+                      itemBuilder: (_, index) => const TProductCardVertical()),
+                ],
+              ),
             ),
           ],
         ),
@@ -64,4 +77,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
