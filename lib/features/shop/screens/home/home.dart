@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             /// header
-            TPrimaryHeaderContainer(
+            const TPrimaryHeaderContainer(
               child: Column(
                 children: [
                   ///Appbar
@@ -62,7 +62,12 @@ class HomeScreen extends StatelessWidget {
                     TImages.promoBanner2,
                     TImages.promoBanner3
                   ]),
-                  SizedBox(height: TSizes.spaceBtwSections),
+                  const SizedBox(height: TSizes.spaceBtwSections),
+
+                  ///- heading
+                  TSectionHeading(title: 'Popular Products', onPressed: (){}),
+                  const SizedBox(height: TSizes.spaceBtwSections),
+
 
                   /// -- popular products
                   TGridLayout(
