@@ -20,6 +20,8 @@ class StoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      ///--appbar--
       appBar: TAppBar(
         title: Text('Store', style: Theme.of(context).textTheme.headlineMedium),
         actions: [
@@ -27,6 +29,8 @@ class StoreScreen extends StatelessWidget {
         ],
       ),
       body: NestedScrollView(
+
+        /// --header--
           headerSliverBuilder: (_, innerBoxIsScrolled) {
             return [
               SliverAppBar(
@@ -110,6 +114,8 @@ class StoreScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                /// tabs
+                // bottom: const TabBar(tabs: [],),
               ),
             ];
           },
