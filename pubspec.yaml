@@ -57,6 +57,7 @@ flutter:
      - assets/images/content/
      - assets/images/products/
      - assets/images/reviews/
+     - assets/images/user/
 
 #-------------------Local fonts-----------------#
 

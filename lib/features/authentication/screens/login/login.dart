@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:zenshop/common/styles/spacing_styles.dart';
 import 'package:zenshop/features/authentication/screens/login/widgets/login_form.dart';
 import 'package:zenshop/features/authentication/screens/login/widgets/login_header.dart';

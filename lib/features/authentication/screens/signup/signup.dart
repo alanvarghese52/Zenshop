@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/get_utils.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:zenshop/common/widgets/login_signup/form_divider.dart';
 import 'package:zenshop/common/widgets/login_signup/social_buttons.dart';
 import 'package:zenshop/features/authentication/screens/signup/widgets/signup_form.dart';
-import 'package:zenshop/utils/constants/colors.dart';
-import 'package:zenshop/utils/helpers/helper_functions.dart';
 
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/constants/text_strings.dart';
@@ -29,7 +26,7 @@ class SignupScreen extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwSections),
 
               /// form
-              TSignupForm(),
+              const TSignupForm(),
               const SizedBox(height: TSizes.spaceBtwSections),
 
               ///divider

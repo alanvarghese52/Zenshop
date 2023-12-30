@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:zenshop/utils/constants/sizes.dart';
 import 'package:zenshop/utils/helpers/helper_functions.dart';
 

@@ -8,11 +8,9 @@ import 'package:zenshop/common/widgets/texts/section_heading.dart';
 import 'package:zenshop/common/widgets/brands/brand_card.dart';
 import 'package:zenshop/features/shop/screens/store/widgets/category_tab.dart';
 import 'package:zenshop/utils/constants/colors.dart';
-import 'package:zenshop/utils/constants/image_strings.dart';
 import 'package:zenshop/utils/constants/sizes.dart';
 import 'package:zenshop/utils/helpers/helper_functions.dart';
 
-import '../../../../common/widgets/brands/brand_show_case.dart';
 
 class StoreScreen extends StatelessWidget {
   const StoreScreen({super.key});
