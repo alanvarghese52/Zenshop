@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:zenshop/common/widgets/appbar/appbar.dart';
 import 'package:zenshop/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:zenshop/common/widgets/texts/section_heading.dart';
+import 'package:zenshop/features/personalization/screens/profile/profile.dart';
 import 'package:zenshop/utils/constants/colors.dart';
 import 'package:zenshop/utils/constants/sizes.dart';
 import '../../../../common/widgets/list_tiles/settings_menu_tile.dart';
@@ -30,7 +32,7 @@ class SettingsScreen extends StatelessWidget {
                               .apply(color: TColors.white))),
 
                   /// user profile
-                  const TUserProfileTile(),
+                   TUserProfileTile(onPressed: () => Get.to(() => const ProfileScreen())),
                   const SizedBox(height: TSizes.spaceBtwSections),
                 ],
               ),
