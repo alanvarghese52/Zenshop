@@ -26,11 +26,8 @@ class ProfileScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    const TCircularImage(
-                        image: TImages.user, width: 80, height: 80),
-                    TextButton(
-                        onPressed: () {},
-                        child: const Text('Change Profile Picture')),
+                    const TCircularImage(image: TImages.user, width: 80, height: 80),
+                    TextButton(onPressed: () {},child: const Text('Change Profile Picture')),
                   ],
                 ),
               ),
@@ -41,8 +38,7 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwItems),
 
               ///heading profile info
-              const TSectionHeading(
-                  title: 'Profile Information', showActionButton: false),
+              const TSectionHeading(title: 'Profile Information', showActionButton: false),
               const SizedBox(height: TSizes.spaceBtwItems),
 
               TProfileMenu(

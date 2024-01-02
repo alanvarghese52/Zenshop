@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../utils/constants/colors.dart';
-import '../curved_edges/curved_edges.dart';
+import '../curved_edges/widgets/curved_edges_widet.dart';
 import 'circular_container.dart';
 
 class TPrimaryHeaderContainer extends StatelessWidget {
@@ -15,7 +15,7 @@ class TPrimaryHeaderContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipPath(
-      clipper: TCurvedEdgesWidget(),
+      clipper: TCustomCurvedEdges(),
       child: Container(
         color: TColors.primary,
 

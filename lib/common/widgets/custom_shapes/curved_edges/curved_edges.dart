@@ -1,31 +1,20 @@
 import 'package:flutter/material.dart';
-
-class TCurvedEdgesWidget extends CustomClipper<Path>{
-  @override
-  Path getClip(Size size){
-    var path = Path();
-    path.lineTo(0, size.height);
-    
-    final firstCurve = Offset(0, size.height - 20);
-    final lastCurve = Offset(30, size.height - 20);
-    path.quadraticBezierTo(firstCurve.dx, firstCurve.dy, lastCurve.dx, lastCurve.dy);
-
-    final secondFirstCurve = Offset(0, size.height - 20);
-    final secondLastCurve = Offset(size.width - 30, size.height - 20);
-    path.quadraticBezierTo(secondFirstCurve.dx, secondFirstCurve.dy, secondLastCurve.dx, secondLastCurve.dy);
-
-    final thirdFirstCurve = Offset(size.width, size.height - 20);
-    final thridLastCurve = Offset(size.width, size.height);
-    path.quadraticBezierTo(thirdFirstCurve.dx, thirdFirstCurve.dy, thridLastCurve.dx, thridLastCurve.dy);
+import 'package:zenshop/common/widgets/custom_shapes/curved_edges/widgets/curved_edges_widet.dart';
 
 
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
+class TCurvedEdgesWidget extends StatelessWidget {
+  const TCurvedEdgesWidget({
+    super.key,
+    required this.child
+  });
+
+  final Widget child;
 
   @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper){
-    return true;
+  Widget build(BuildContext context) {
+    return ClipPath(
+      clipper: TCustomCurvedEdges(),
+      child: child,
+    );
   }
 }

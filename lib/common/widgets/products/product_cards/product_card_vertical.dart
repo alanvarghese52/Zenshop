@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:zenshop/common/styles/shadows.dart';
 import 'package:zenshop/common/widgets/images/t_rounded_image.dart';
 import 'package:zenshop/common/widgets/products/product_cards/product_price_text.dart';
 import 'package:zenshop/common/widgets/texts/product_title_text.dart';
+import 'package:zenshop/features/shop/screens/product_details/product_detail.dart';
 import 'package:zenshop/utils/constants/colors.dart';
 import 'package:zenshop/utils/constants/image_strings.dart';
 import 'package:zenshop/utils/constants/sizes.dart';
@@ -22,7 +24,7 @@ class TProductCardVertical extends StatelessWidget {
 
     /// container with side padding, color, edges, radius & shadows
     return GestureDetector(
-      onTap: () {},
+      onTap: () => Get.to(() => const ProductDetailScreen()),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
