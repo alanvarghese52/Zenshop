@@ -29,8 +29,10 @@ dependencies:
   get: ^4.6.5
   get_storage: ^2.1.1
   iconsax: ^0.0.8
-  carousel_slider: ^4.2.1
+
   # product Specific
+  readmore: ^2.2.0
+  carousel_slider: ^4.2.1
 
 
 
