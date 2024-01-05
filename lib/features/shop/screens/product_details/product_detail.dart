@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:readmore/readmore.dart';
 import 'package:zenshop/common/widgets/texts/section_heading.dart';
@@ -8,6 +9,7 @@ import 'package:zenshop/utils/constants/sizes.dart';
 import '../../../../common/widgets/custom_shapes/curved_edges/widgets/product_detail_image_slider.dart';
 import '../../../../common/widgets/custom_shapes/curved_edges/widgets/product_meta_data.dart';
 import '../../../../common/widgets/custom_shapes/curved_edges/widgets/rating_share_widget.dart';
+import '../product_reviews/product_reviews.dart';
 
 class ProductDetailScreen extends StatelessWidget {
   const ProductDetailScreen({super.key});
@@ -76,7 +78,7 @@ class ProductDetailScreen extends StatelessWidget {
                       const TSectionHeading(
                           title: 'Review(199)', showActionButton: false),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () => Get.to(() => const ProductReviewScreen()),
                           icon: const Icon(Iconsax.arrow_right_3))
                     ],
                   ),
