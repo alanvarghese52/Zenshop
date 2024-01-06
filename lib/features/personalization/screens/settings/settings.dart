@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:zenshop/common/widgets/appbar/appbar.dart';
 import 'package:zenshop/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:zenshop/common/widgets/texts/section_heading.dart';
+import 'package:zenshop/features/personalization/screens/address/address.dart';
 import 'package:zenshop/features/personalization/screens/profile/profile.dart';
 import 'package:zenshop/utils/constants/colors.dart';
 import 'package:zenshop/utils/constants/sizes.dart';
@@ -48,10 +49,11 @@ class SettingsScreen extends StatelessWidget {
                       title: 'Account Settings', showActionButton: false),
                   const SizedBox(height: TSizes.spaceBtwItems),
 
-                  const TSettingsMenuTile(
+                   TSettingsMenuTile(
                       icon: Iconsax.safe_home,
                       title: 'My Address',
-                      subTitle: 'Set shopping delivery address'),
+                      subTitle: 'Set shopping delivery address',
+                  onTap: () => Get.to(() => const UserAddressScreen())),
                   const TSettingsMenuTile(
                       icon: Iconsax.shopping_cart,
                       title: 'My Cart',
