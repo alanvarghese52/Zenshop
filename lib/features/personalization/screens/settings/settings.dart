@@ -6,6 +6,8 @@ import 'package:zenshop/common/widgets/custom_shapes/containers/primary_header_c
 import 'package:zenshop/common/widgets/texts/section_heading.dart';
 import 'package:zenshop/features/personalization/screens/address/address.dart';
 import 'package:zenshop/features/personalization/screens/profile/profile.dart';
+import 'package:zenshop/features/shop/screens/cart/cart.dart';
+import 'package:zenshop/features/shop/screens/order/order.dart';
 import 'package:zenshop/utils/constants/colors.dart';
 import 'package:zenshop/utils/constants/sizes.dart';
 import '../../../../common/widgets/list_tiles/settings_menu_tile.dart';
@@ -54,14 +56,16 @@ class SettingsScreen extends StatelessWidget {
                       title: 'My Address',
                       subTitle: 'Set shopping delivery address',
                   onTap: () => Get.to(() => const UserAddressScreen())),
-                  const TSettingsMenuTile(
+                   TSettingsMenuTile(
                       icon: Iconsax.shopping_cart,
                       title: 'My Cart',
-                      subTitle: 'Add, remove products and move to checkout'),
-                  const TSettingsMenuTile(
+                      subTitle: 'Add, remove products and move to checkout',
+                      onTap: () => Get.to(() => const CartScreen())),
+                  TSettingsMenuTile(
                       icon: Iconsax.bag_tick,
                       title: 'My Order',
-                      subTitle: 'In-progress and Completed orders'),
+                      subTitle: 'In-progress and Completed orders',
+                      onTap: () => Get.to(() => const OrderScreen())),
                   const TSettingsMenuTile(
                       icon: Iconsax.bank,
                       title: 'Bank Account',

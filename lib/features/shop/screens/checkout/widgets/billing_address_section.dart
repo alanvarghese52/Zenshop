@@ -13,7 +13,7 @@ class TBillingAddressSection extends StatelessWidget {
       children: [
         TSectionHeading(title: 'Payment Method', buttonTitle: 'Change', onPressed:(){}),
         Text('Alan Varghese', style: Theme.of(context).textTheme.bodyLarge),
-        SizedBox(height: TSizes.spaceBtwItems/2),
+        const SizedBox(height: TSizes.spaceBtwItems/2),
         Row(
           children: [
             const Icon(Icons.phone, color: Colors.grey, size: 16),
