@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:zenshop/common/styles/shadows.dart';
 import 'package:zenshop/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:zenshop/common/widgets/images/t_rounded_image.dart';
 import 'package:zenshop/common/widgets/products/product_cards/product_price_text.dart';
@@ -85,7 +84,7 @@ class TProductCardHorizontal extends StatelessWidget {
                     ],
                   ),
 
-                  Spacer(),
+                  const Spacer(),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

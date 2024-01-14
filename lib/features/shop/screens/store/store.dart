@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:zenshop/common/widgets/appbar/appbar.dart';
 import 'package:zenshop/common/widgets/appbar/tabbar.dart';
 import 'package:zenshop/common/widgets/custom_shapes/containers/search_container.dart';
@@ -6,6 +8,7 @@ import 'package:zenshop/common/widgets/layouts/grid_layout.dart';
 import 'package:zenshop/common/widgets/products/cart/cart_menu_icon.dart';
 import 'package:zenshop/common/widgets/texts/section_heading.dart';
 import 'package:zenshop/common/widgets/brands/brand_card.dart';
+import 'package:zenshop/features/shop/screens/brand/all_brands.dart';
 import 'package:zenshop/features/shop/screens/store/widgets/category_tab.dart';
 import 'package:zenshop/utils/constants/colors.dart';
 import 'package:zenshop/utils/constants/sizes.dart';
@@ -59,7 +62,7 @@ class StoreScreen extends StatelessWidget {
                         TSectionHeading(
                             title: 'Featured Brands',
                             showActionButton: true,
-                            onPressed: () {}),
+                            onPressed: () => Get.to(() => const AllBrandsScreen())),
                         const SizedBox(height: TSizes.spaceBtwItems / 1.5),
 
                         TGridLayout(
