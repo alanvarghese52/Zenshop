@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "506335341874",
+    "project_id": "zenshop-b1c3a",
+    "storage_bucket": "zenshop-b1c3a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506335341874:android:068ed37265d06a1eebbb2b",
+        "android_client_info": {
+          "package_name": "com.example.zenshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506335341874-dpm9houluqim9qg9eihq16kekn5rl6t7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.zenshop",
+            "certificate_hash": "823f0635e1976ad565ce9dfeb3176437304c6a8a"
+          }
+        },
+        {
+          "client_id": "506335341874-6ot23oe7b8903cng3g3sh3m76b7sqgk2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy3piaMTlz28HE_7i2MJEqn5SEsZJkXOw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506335341874-6ot23oe7b8903cng3g3sh3m76b7sqgk2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "506335341874-e3e9kmi3e7tmciuqj367vi59jatgvdnq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.zenshop"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
