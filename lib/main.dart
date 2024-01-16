@@ -23,7 +23,6 @@ Future<void> main() async {
           (FirebaseApp value) => Get.put(AuthenticationRepository()),
   );
 
-
   // load all the material design/ theme/ localizations/ bindings
   runApp(const App());
 }

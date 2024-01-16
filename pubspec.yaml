@@ -39,7 +39,8 @@ dependencies:
 
   # firebase
   firebase_core: ^2.24.2
-
+  firebase_auth: ^4.14.0
+  cloud_firestore: ^4.13.1
 
 
   #----------------./ Packages end------------------------------#

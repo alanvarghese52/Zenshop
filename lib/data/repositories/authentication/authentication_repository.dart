@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -11,6 +13,7 @@ class AuthenticationRepository extends GetxController {
 
   /// variables
   final deviceStorage = GetStorage();
+  final _auth = FirebaseAuth.instance;
 
   /// called from main.dart on app launch
   @override
@@ -22,11 +25,10 @@ class AuthenticationRepository extends GetxController {
   /// function to show relevant screen
   screenRedirect() async {
     //local storage
-    if(kDebugMode){
+    if (kDebugMode) {
       print('============= GET STORAGE ==============');
       print(deviceStorage.read('IsFirstTime'));
     }
-
 
     deviceStorage.writeIfNull('isFirstTime', true);
     deviceStorage.read('isFirstTime') != true
@@ -39,18 +41,36 @@ class AuthenticationRepository extends GetxController {
   /// [Emailauthentication] - signin
 
   /// [Emailauthentication] - register
+  Future<UserCredential> registerWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      return await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. please try again';
+    }
+  }
 
-  /// [reauthenticate] - reauthenticate user
+  /// [email verification] - mail verification
 
-  /// [emailverification] - mail verification
+  /// [re authenticate] - re authenticate user
 
-  /// [Emailauthentication] - forget password
+  /// [Email authentication] - forget password
 
 /*------------ federated identity & social sign-in --------------*/
 
-  /// [googleauthentication] - google
+  /// [google authentication] - google
 
-  /// [facebookauthentication] - facebook
+  /// [facebook authentication] - facebook
 
 /*------------ end federated identity & social sign-in --------------*/
+
 }
