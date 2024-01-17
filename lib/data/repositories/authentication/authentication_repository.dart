@@ -7,6 +7,10 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:zenshop/features/authentication/screens/login/login.dart';
 
 import '../../../features/authentication/screens/onboarding/onboarding.dart';
+import '../../../utils/exceptions/firebase_auth_exceptions.dart';
+import '../../../utils/exceptions/firebase_exceptions.dart';
+import '../../../utils/exceptions/format_exceptions.dart';
+import '../../../utils/exceptions/platform_exceptions.dart';
 
 class AuthenticationRepository extends GetxController {
   static AuthenticationRepository get instance => Get.find();
@@ -38,9 +42,9 @@ class AuthenticationRepository extends GetxController {
 
 /* ----------------- Email & password sign in --------------------*/
 
-  /// [Emailauthentication] - signin
+  /// [Email authentication] - sign in
 
-  /// [Emailauthentication] - register
+  /// [Email authentication] - register
   Future<UserCredential> registerWithEmailAndPassword(
       String email, String password) async {
     try {
@@ -49,7 +53,7 @@ class AuthenticationRepository extends GetxController {
     } on FirebaseAuthException catch (e) {
       throw TFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
-      throw TFirebaseAuthException(e.code).message;
+      throw TFirebaseException(e.code).message;
     } on FormatException catch (_) {
       throw const TFormatException();
     } on PlatformException catch (e) {
