@@ -31,6 +31,7 @@ class AuthenticationRepository extends GetxController {
   /// function to show relevant screen
   screenRedirect() async {
     final user =_auth.currentUser;
+
     if(user != null){
       if(user.emailVerified){
         Get.offAll(() => const NavigationMenu());
@@ -50,6 +51,22 @@ class AuthenticationRepository extends GetxController {
 /* ----------------- Email & password sign in --------------------*/
 
   /// [Email authentication] - sign in
+  Future<UserCredential> loginWithEmailAndPassword(String email, String password) async {
+    try {
+      return await _auth.signInWithEmailAndPassword(email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. please try again';
+    }
+  }
+
 
   /// [Email authentication] - register
   Future<UserCredential> registerWithEmailAndPassword(

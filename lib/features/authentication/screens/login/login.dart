@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:zenshop/common/styles/spacing_styles.dart';
 import 'package:zenshop/features/authentication/screens/login/widgets/login_form.dart';
 import 'package:zenshop/features/authentication/screens/login/widgets/login_header.dart';
-import 'package:zenshop/utils/helpers/helper_functions.dart';
 import 'package:zenshop/utils/constants/text_strings.dart';
 import '../../../../common/widgets/login_signup/form_divider.dart';
 import '../../../../common/widgets/login_signup/social_buttons.dart';
@@ -14,8 +13,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(

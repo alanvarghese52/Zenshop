@@ -10,7 +10,7 @@ class TImages {
   static const String facebook = "assets/logos/facebook-icon.png";
 
   // -- lottie animations
-  static String  successfullyRegisterAnimation =  "assets/images/animations/72462-check-register.json";
+  static const String successfullyRegisterAnimation =  "assets/images/animations/successfully-done.gif";
   static String docerAnimation = "assets/images/animations/141594-animation-of-docer.json";
 
   // -- Category Icons
