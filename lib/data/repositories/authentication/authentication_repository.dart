@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:zenshop/features/authentication/screens/login/login.dart';
 import 'package:zenshop/features/authentication/screens/signup/widgets/verify_email.dart';
 import 'package:zenshop/navigation_menu.dart';
@@ -33,6 +35,7 @@ class AuthenticationRepository extends GetxController {
     final user =_auth.currentUser;
 
     if(user != null){
+      //if the user is logged in
       if(user.emailVerified){
         Get.offAll(() => const NavigationMenu());
       }else{
@@ -111,6 +114,33 @@ class AuthenticationRepository extends GetxController {
 /*------------ federated identity & social sign-in --------------*/
 
   /// [google authentication] - google
+  Future<UserCredential?> signInWithGoogle() async{
+    try {
+      // trigger the authentication flow
+      final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
+
+      //obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
+
+      //create a new credential
+      final credentials = GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+
+      // once signed in, return the userCredentials
+      return await _auth.signInWithCredential(credentials);
+
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      if(kDebugMode)print('Something went wrong: $e');
+      return null;
+    }
+  }
 
   /// [facebook authentication] - facebook
 
@@ -119,6 +149,7 @@ class AuthenticationRepository extends GetxController {
   /// [logout user] - valid for any authentication.
   Future<void> logout() async{
     try {
+      await GoogleSignIn().signOut();
       await FirebaseAuth.instance.signOut();
       Get.offAll(()=> const LoginScreen());
     } on FirebaseAuthException catch (e) {
