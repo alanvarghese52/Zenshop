@@ -44,6 +44,7 @@ class AuthenticationRepository extends GetxController {
     }else{
       // local storage
       deviceStorage.writeIfNull('isFirstTime', true);
+
       // check if it's the first time launching the app
       deviceStorage.read('isFirstTime') != true
           ? Get.offAll(() => const LoginScreen())
@@ -107,9 +108,24 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  /// [re authenticate] - re authenticate user
-
   /// [Email authentication] - forget password
+  Future<void> sendPasswordResetEmail(String email) async{
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw TFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw TFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const TFormatException();
+    } on PlatformException catch (e) {
+      throw TPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. please try again';
+    }
+  }
+
+  /// [re authenticate] - re authenticate user
 
 /*------------ federated identity & social sign-in --------------*/
 
