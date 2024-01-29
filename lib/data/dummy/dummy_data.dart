@@ -4,6 +4,7 @@ import 'package:zenshop/utils/constants/image_strings.dart';
 
 import '../../features/shop/models/banner_model.dart';
 import '../../features/shop/models/category_model.dart';
+import '../../routes/routes.dart';
 
 class TDummyData {
   /// - Banners

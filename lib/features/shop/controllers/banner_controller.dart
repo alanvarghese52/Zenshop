@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:zenshop/features/shop/models/banner_model.dart';
-
 import '../../../data/repositories/banners/banner_repository.dart';
 import '../../../utils/popups/loaders.dart';
 
@@ -10,6 +9,13 @@ class BannerController extends GetxController{
   final isLoading = false.obs;
   final carousalCurrentIndex = 0.obs;
   final RxList<BannerModel> banners = <BannerModel>[].obs;
+
+
+  @override
+  void onInit() {
+    fetchBanners();
+    super.onInit();
+  }
 
   /// update page navigational data
   void updatePageIndicator(index) {
@@ -28,7 +34,6 @@ class BannerController extends GetxController{
 
       // assign banner
       this.banners.assignAll(banners);
-      //12.19
 
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());

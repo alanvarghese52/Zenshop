@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:zenshop/common/widgets/loaders/network_manager.dart';
 import 'package:zenshop/data/repositories/authentication/authentication_repository.dart';
 import 'package:zenshop/features/authentication/screens/password_configuration/reset_password.dart';

@@ -10,7 +10,6 @@ import '../../../../common/widgets/custom_shapes/containers/search_container.dar
 import '../../../../common/widgets/layouts/grid_layout.dart';
 import '../../../../common/widgets/products/product_cards/product_card_vertical.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
-import '../../../../utils/constants/image_strings.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -61,11 +60,7 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   /// - promo slider
-                  const TPromoSlider(banners: [
-                    TImages.promoBanner1,
-                    TImages.promoBanner2,
-                    TImages.promoBanner3
-                  ]),
+                  const TPromoSlider(),
                   const SizedBox(height: TSizes.spaceBtwSections),
 
                   ///- heading

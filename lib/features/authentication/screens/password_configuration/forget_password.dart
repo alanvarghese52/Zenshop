@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:zenshop/features/authentication/controllers/forget_password/forget_password_controller.dart';
-import 'package:zenshop/features/authentication/screens/password_configuration/reset_password.dart';
 import 'package:zenshop/utils/constants/sizes.dart';
 import 'package:zenshop/utils/constants/text_strings.dart';
 import 'package:zenshop/utils/validators/validation.dart';
