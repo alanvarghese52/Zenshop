@@ -10,12 +10,14 @@ import '../../../../common/widgets/custom_shapes/containers/search_container.dar
 import '../../../../common/widgets/layouts/grid_layout.dart';
 import '../../../../common/widgets/products/product_cards/product_card_vertical.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
+import '../../controllers/product_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -70,7 +72,7 @@ class HomeScreen extends StatelessWidget {
 
                   /// -- popular products
                   TGridLayout(
-                      itemCount: 2,
+                      itemCount: 4,
                       itemBuilder: (_, index) => const TProductCardVertical()),
                 ],
               ),
