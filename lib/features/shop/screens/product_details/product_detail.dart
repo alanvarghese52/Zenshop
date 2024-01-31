@@ -9,10 +9,13 @@ import 'package:zenshop/utils/constants/sizes.dart';
 import '../../../../common/widgets/custom_shapes/curved_edges/widgets/product_detail_image_slider.dart';
 import '../../../../common/widgets/custom_shapes/curved_edges/widgets/product_meta_data.dart';
 import '../../../../common/widgets/custom_shapes/curved_edges/widgets/rating_share_widget.dart';
+import '../../models/product_model.dart';
 import '../product_reviews/product_reviews.dart';
 
 class ProductDetailScreen extends StatelessWidget {
-  const ProductDetailScreen({super.key});
+  const ProductDetailScreen({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {

@@ -3,6 +3,7 @@ import 'package:zenshop/common/widgets/layouts/grid_layout.dart';
 import 'package:zenshop/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:zenshop/common/widgets/texts/section_heading.dart';
 import 'package:zenshop/features/shop/models/category_model.dart';
+import 'package:zenshop/features/shop/models/product_model.dart';
 
 import '../../../../../common/widgets/brands/brand_show_case.dart';
 import '../../../../../utils/constants/image_strings.dart';
@@ -32,7 +33,7 @@ class TCategoryTab extends StatelessWidget {
               TSectionHeading(title: 'you might like', onPressed: (){}),
               const SizedBox(height: TSizes.spaceBtwItems),
 
-              TGridLayout(itemCount: 4, itemBuilder: (_,index) => const TProductCardVertical()),
+              TGridLayout(itemCount: 4, itemBuilder: (_,index) =>  TProductCardVertical(product: ProductModel.empty())),
               const SizedBox(height: TSizes.spaceBtwSections),
 
             ],

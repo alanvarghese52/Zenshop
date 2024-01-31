@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zenshop/common/widgets/shimmers/vertical_product_shimmer.dart';
 import 'package:zenshop/features/shop/screens/all_products/all_products.dart';
 import 'package:zenshop/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:zenshop/features/shop/screens/home/widgets/home_categories.dart';
@@ -56,7 +57,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            ///Body --
+            ///Body
             Padding(
               padding: const EdgeInsets.all(TSizes.defaultSpace),
               child: Column(
@@ -66,14 +67,24 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwSections),
 
                   ///- heading
-                  TSectionHeading(title: 'Popular Products', onPressed: () => Get.to(() => const AllProducts())),
+                  TSectionHeading(
+                      title: 'Popular Products',
+                      onPressed: () => Get.to(() => const AllProducts())),
                   const SizedBox(height: TSizes.spaceBtwSections),
 
-
                   /// -- popular products
-                  TGridLayout(
-                      itemCount: 4,
-                      itemBuilder: (_, index) => const TProductCardVertical()),
+                  Obx(() {
+                    if(controller.isLoading.value) return const TVerticalProductShimmer();
+
+                    if(controller.featuredProducts.isEmpty){
+                      return Center(child: Text('No data found!', style: Theme.of(context).textTheme.bodyMedium));
+                    }
+
+                    return TGridLayout(
+                        itemCount: controller.featuredProducts.length,
+                        itemBuilder: (_, index) => TProductCardVertical(product: controller.featuredProducts[index]),
+                    );
+                  }),
                 ],
               ),
             ),

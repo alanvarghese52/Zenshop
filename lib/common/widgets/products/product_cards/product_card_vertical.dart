@@ -5,26 +5,31 @@ import 'package:zenshop/common/styles/shadows.dart';
 import 'package:zenshop/common/widgets/images/t_rounded_image.dart';
 import 'package:zenshop/common/widgets/products/product_cards/product_price_text.dart';
 import 'package:zenshop/common/widgets/texts/product_title_text.dart';
+import 'package:zenshop/features/shop/controllers/product_controller.dart';
+import 'package:zenshop/features/shop/models/product_model.dart';
 import 'package:zenshop/features/shop/screens/product_details/product_detail.dart';
 import 'package:zenshop/utils/constants/colors.dart';
-import 'package:zenshop/utils/constants/image_strings.dart';
 import 'package:zenshop/utils/constants/sizes.dart';
 import 'package:zenshop/utils/helpers/helper_functions.dart';
-
+import '../../../../utils/constants/enums.dart';
 import '../../custom_shapes/containers/rounded_container.dart';
 import '../../icons/t_circular_icon.dart';
 import '../../texts/t_brand_title_text_with_verified_icon.dart';
 
 class TProductCardVertical extends StatelessWidget {
-  const TProductCardVertical({super.key});
+  const TProductCardVertical({super.key, required this.product});
+
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {
+    final controller = ProductController.instance;
+    final salePercentage = controller.calculateSalePercentage(product.price, product.salePrice);
     final dark = THelperFunctions.isDarkMode(context);
 
     /// container with side padding, color, edges, radius & shadows
     return GestureDetector(
-      onTap: () => Get.to(() => const ProductDetailScreen()),
+      onTap: () => Get.to(() => ProductDetailScreen(product: product)),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
@@ -38,13 +43,14 @@ class TProductCardVertical extends StatelessWidget {
             //thumbnail, wishlist, discount tag
             TRoundedContainer(
               height: 180,
+              width: 180,
               padding: const EdgeInsets.all(TSizes.sm),
               backgroundColor: dark ? TColors.dark : TColors.light,
               child: Stack(
                 children: [
-                  // -Thumbnail images
-                  const TRoundedImage(
-                      imageUrl: TImages.productImage1, applyImageRadius: true),
+
+                  /// -Thumbnail images
+                 Center(child: TRoundedImage(imageUrl: product.thumbnail, applyImageRadius: true, isNetworkImage: true)),
 
                   /// -sale tag
                   Positioned(
@@ -52,13 +58,8 @@ class TProductCardVertical extends StatelessWidget {
                     child: TRoundedContainer(
                       radius: TSizes.sm,
                       backgroundColor: TColors.secondary.withOpacity(0.8),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: TSizes.sm, vertical: TSizes.xs),
-                      child: Text('25%',
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge!
-                              .apply(color: TColors.black)),
+                      padding: const EdgeInsets.symmetric(horizontal: TSizes.sm, vertical: TSizes.xs),
+                      child: Text('$salePercentage%',style: Theme.of(context).textTheme.labelLarge!.apply(color: TColors.black)),
                     ),
                   ),
 
@@ -72,14 +73,14 @@ class TProductCardVertical extends StatelessWidget {
             const SizedBox(height: TSizes.spaceBtwItems / 2),
 
             /// -details
-            const Padding(
-              padding: EdgeInsets.only(left: TSizes.sm),
+            Padding(
+              padding: const EdgeInsets.only(left: TSizes.sm),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TProductTitleText(title: 'Green Nike Air Shoes', smallSize: true),
-                  SizedBox(height: TSizes.spaceBtwItems / 2),
-                  TBrandTitleWithVerifiedIcon(title: 'Nike'),
+                  TProductTitleText(title: product.title, smallSize: true),
+                  const SizedBox(height: TSizes.spaceBtwItems / 2),
+                  TBrandTitleWithVerifiedIcon(title: product.brand!.name),
                 ],
               ),
             ),
@@ -87,13 +88,31 @@ class TProductCardVertical extends StatelessWidget {
             // add spacer
             const Spacer(),
 
-            /// price
+            /// price row
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(left: TSizes.sm),
-                  child: TProductPriceText(price: '1200'),
+
+                /// price
+                Flexible(
+                  child: Column(
+                    children: [
+                      if(product.productType == ProductType.single.toString() && product.salePrice > 0)
+                        Padding(
+                          padding: const EdgeInsets.only(left: TSizes.sm),
+                          child: Text(
+                            product.price.toString(),
+                            style: Theme.of(context).textTheme.labelMedium!.apply(decoration: TextDecoration.lineThrough),
+                          ),
+                        ),
+
+                     /// price, show sale price as main price if sale exist.
+                      Padding(
+                        padding: const EdgeInsets.only(left: TSizes.sm),
+                        child: TProductPriceText(price: controller.getProductPrice(product)),
+                      ),
+                    ],
+                  ),
                 ),
 
                 /// add to cart
@@ -109,13 +128,11 @@ class TProductCardVertical extends StatelessWidget {
                   child: const SizedBox(
                       width: TSizes.iconLg * 1.2,
                       height: TSizes.iconLg * 1.2,
-                      child: Center(
-                          child:
-                          Icon(Iconsax.add, color: TColors.white))),
+                      child: Center(child:Icon(Iconsax.add, color: TColors.white)),
+                  ),
                 ),
               ],
             ),
-
           ],
         ),
       ),

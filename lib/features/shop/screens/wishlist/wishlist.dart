@@ -8,6 +8,8 @@ import 'package:zenshop/common/widgets/products/product_cards/product_card_verti
 import 'package:zenshop/features/shop/screens/home/home.dart';
 import 'package:zenshop/utils/constants/sizes.dart';
 
+import '../../models/product_model.dart';
+
 class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({super.key});
 
@@ -25,7 +27,9 @@ class FavouriteScreen extends StatelessWidget {
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             children: [
-              TGridLayout(itemCount: 6, itemBuilder: (_, index) => const TProductCardVertical())
+              TGridLayout(itemCount: 6,
+                  itemBuilder: (_, index) =>
+                      TProductCardVertical(product: ProductModel.empty())),
             ],
           ),
         ),

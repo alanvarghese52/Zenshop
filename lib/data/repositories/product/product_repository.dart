@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../../features/shop/models/product_model.dart';
+import '../../../utils/constants/enums.dart';
 import '../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
 import '../../services/cloud_storage/firebase_storage_service.dart';
@@ -79,7 +80,7 @@ class ProductRepository extends GetxController {
           }
         }
 
-        // Store product in Firestore
+        // Store product in FireStore
         await _db.collection("Products").doc(product.id).set(product.toJson());
       }
     } on FirebaseException catch (e) {
