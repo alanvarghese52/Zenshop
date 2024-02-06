@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:zenshop/common/widgets/shimmers/shimmer.dart';
 import '../../../utils/constants/sizes.dart';
 import '../layouts/grid_layout.dart';
+import 'shimmer.dart';
 
 class TVerticalProductShimmer extends StatelessWidget {
   const TVerticalProductShimmer({
@@ -20,7 +20,6 @@ class TVerticalProductShimmer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             /// Image
             TShimmerEffect(width: 180, height: 180),
             SizedBox(height: TSizes.spaceBtwItems),
@@ -35,4 +34,3 @@ class TVerticalProductShimmer extends StatelessWidget {
     );
   }
 }
-

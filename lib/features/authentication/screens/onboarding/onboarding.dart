@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:zenshop/features/authentication/screens/onboarding/widgets/onboarding_dot_navigation.dart';
-import 'package:zenshop/features/authentication/screens/onboarding/widgets/onboarding_next_button.dart';
-import 'package:zenshop/features/authentication/screens/onboarding/widgets/onboarding_page.dart';
-import 'package:zenshop/features/authentication/screens/onboarding/widgets/onboarding_skip.dart';
+import 'package:get/get.dart';
+
 import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/constants/text_strings.dart';
-import '../../controllers/onboarding/onboarding_controller.dart';
+import '../../controllers/onboarding_controller.dart';
+import 'widgets/onboarding_dot_navigation.dart';
+import 'widgets/onboarding_next_button.dart';
+import 'widgets/onboarding_page.dart';
+import 'widgets/onboarding_skip_button.dart';
 
+/// Onboarding screen to introduce users to the app.
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Controller for managing onboarding logic and state.
     final controller = Get.put(OnBoardingController());
     return Scaffold(
       body: Stack(
         children: [
-          /// horizontal scrollable pages
+          /// Horizontal Scrollable Pages
           PageView(
             controller: controller.pageController,
             onPageChanged: controller.updatePageIndicator,
@@ -41,18 +43,16 @@ class OnBoardingScreen extends StatelessWidget {
             ],
           ),
 
-          /// skip button
-          const OnBoardingSkip(),
+          /// Skip Button
+          const TOnBoardingSkipButton(),
 
           /// Dot Navigation SmoothPageIndicator
-          const OnBoardingDotNavigation(),
+          const TOnBoardingDotNavigation(),
 
-          /// Circular button
-          const OnBoardingNextButton(),
+          /// Circular Button
+          const TOnBoardingNextButton(),
         ],
       ),
     );
   }
 }
-
-

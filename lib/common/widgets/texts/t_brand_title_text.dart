@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:zenshop/utils/constants/enums.dart';
+
+import '../../../utils/constants/enums.dart';
 
 class TBrandTitleText extends StatelessWidget {
-  const TBrandTitleText(
-      {super.key,
-      this.color,
-      required this.title,
-      this.maxLines = 1,
-      this.textAlign = TextAlign.center,
-      this.brandTextSize = TextSizes.small});
+  const TBrandTitleText({
+    super.key,
+    this.color,
+    this.maxLines = 1,
+    required this.title,
+    this.textAlign = TextAlign.center,
+    this.brandTextSize = TextSizes.small,
+  });
 
   final Color? color;
   final String title;
@@ -23,8 +25,7 @@ class TBrandTitleText extends StatelessWidget {
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: TextOverflow.ellipsis,
-
-      ///check brandsize
+      // Check which brandSize is required and set that style.
       style: brandTextSize == TextSizes.small
           ? Theme.of(context).textTheme.labelMedium!.apply(color: color)
           : brandTextSize == TextSizes.medium

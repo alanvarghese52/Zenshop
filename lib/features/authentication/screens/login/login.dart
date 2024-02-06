@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:zenshop/common/styles/spacing_styles.dart';
-import 'package:zenshop/features/authentication/screens/login/widgets/login_form.dart';
-import 'package:zenshop/features/authentication/screens/login/widgets/login_header.dart';
-import 'package:zenshop/utils/constants/text_strings.dart';
+
+import '../../../../common/styles/spacing_styles.dart';
 import '../../../../common/widgets/login_signup/form_divider.dart';
 import '../../../../common/widgets/login_signup/social_buttons.dart';
 import '../../../../utils/constants/sizes.dart';
+import '../../../../utils/constants/text_strings.dart';
+import 'widgets/login_form.dart';
+import 'widgets/login_header.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -19,18 +20,18 @@ class LoginScreen extends StatelessWidget {
           padding: TSpacingStyle.paddingWithAppBarHeight,
           child: Column(
             children: [
-              ///logo, title
+              ///  Header
               const TLoginHeader(),
 
-              /// form
+              /// Form
               const TLoginForm(),
 
-              ///divider
+              /// Divider
               TFormDivider(dividerText: TTexts.orSignInWith.capitalize!),
               const SizedBox(height: TSizes.spaceBtwSections),
 
-              ///footer
-              const TSocialButtons()
+              /// Footer
+              const TSocialButtons(),
             ],
           ),
         ),
@@ -38,9 +39,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-

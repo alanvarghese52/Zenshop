@@ -1,18 +1,21 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/constants/sizes.dart';
+import '../shimmers/shimmer.dart';
 
 class TRoundedImage extends StatelessWidget {
-  const TRoundedImage({super.key,
+  const TRoundedImage({
+    super.key,
+    this.border,
+    this.padding,
+    this.onPressed,
     this.width,
     this.height,
-    required this.imageUrl,
     this.applyImageRadius = true,
-    this.border,
-    this.backgroundColor,
+    required this.imageUrl,
     this.fit = BoxFit.contain,
-    this.padding,
-    this.isNetworkImage =false,
-    this.onPressed,
+    this.backgroundColor,
+    this.isNetworkImage = false,
     this.borderRadius = TSizes.md,
   });
 
@@ -35,19 +38,20 @@ class TRoundedImage extends StatelessWidget {
         width: width,
         height: height,
         padding: padding,
-        decoration: BoxDecoration(
-            border: border,
-            color: backgroundColor,
-            borderRadius: BorderRadius.circular(borderRadius)),
+        decoration: BoxDecoration(border: border, color: backgroundColor, borderRadius: BorderRadius.circular(borderRadius)),
         child: ClipRRect(
-          borderRadius: applyImageRadius
-              ? BorderRadius.circular(borderRadius)
-              : BorderRadius.zero,
-          child: Image(
-              fit: fit,
-              image: isNetworkImage
-                  ? NetworkImage(imageUrl)
-                  : AssetImage(imageUrl) as ImageProvider),
+          borderRadius: applyImageRadius ? BorderRadius.circular(borderRadius) : BorderRadius.zero,
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  fit: fit,
+                  imageUrl: imageUrl,
+                  progressIndicatorBuilder: (context, url, downloadProgress) => TShimmerEffect(width: width ?? double.infinity, height: height ?? 158),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                )
+              : Image(
+                  fit: fit,
+                  image: AssetImage(imageUrl),
+                ),
         ),
       ),
     );

@@ -4,10 +4,10 @@ import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/device/device_utility.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
-import '../../../controllers/onboarding/onboarding_controller.dart';
+import '../../../controllers/onboarding_controller.dart';
 
-class OnBoardingNextButton extends StatelessWidget {
-  const OnBoardingNextButton({
+class TOnBoardingNextButton extends StatelessWidget {
+  const TOnBoardingNextButton({
     super.key,
   });
 
@@ -19,8 +19,7 @@ class OnBoardingNextButton extends StatelessWidget {
       bottom: TDeviceUtils.getBottomNavigationBarHeight(),
       child: ElevatedButton(
         onPressed: () => OnBoardingController.instance.nextPage(),
-        style: ElevatedButton.styleFrom(shape: const CircleBorder(),
-            backgroundColor : dark ? TColors.primary : Colors.black),
+        style: ElevatedButton.styleFrom(shape: const CircleBorder(), backgroundColor: dark ? TColors.primary : Colors.black),
         child: const Icon(Iconsax.arrow_right_3),
       ),
     );

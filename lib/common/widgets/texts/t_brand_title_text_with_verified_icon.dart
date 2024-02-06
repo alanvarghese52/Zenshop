@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:zenshop/common/widgets/texts/t_brand_title_text.dart';
-import 'package:zenshop/utils/constants/enums.dart';
+
 import '../../../utils/constants/colors.dart';
+import '../../../utils/constants/enums.dart';
 import '../../../utils/constants/sizes.dart';
+import 't_brand_title_text.dart';
 
 class TBrandTitleWithVerifiedIcon extends StatelessWidget {
   const TBrandTitleWithVerifiedIcon({
     super.key,
-    required this.title,
-    this.maxLines =1,
     this.textColor,
-    this.iconColor= TColors.primary,
-    this.textAlign= TextAlign.center,
-    this.brandTextSize= TextSizes.small,
+    this.maxLines = 1,
+    required this.title,
+    this.iconColor = TColors.primary,
+    this.textAlign = TextAlign.center,
+    this.brandTextSize = TextSizes.small,
   });
 
   final String title;
@@ -37,7 +38,7 @@ class TBrandTitleWithVerifiedIcon extends StatelessWidget {
           ),
         ),
         const SizedBox(width: TSizes.xs),
-        const Icon(Iconsax.verify5, color: TColors.primary, size: TSizes.iconXs),
+        Icon(Iconsax.verify5, color: iconColor, size: TSizes.iconXs),
       ],
     );
   }

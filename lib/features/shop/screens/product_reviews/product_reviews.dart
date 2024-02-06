@@ -1,42 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:zenshop/common/widgets/appbar/appbar.dart';
-import 'package:zenshop/features/shop/screens/product_reviews/widgets/rating_progress_indicator.dart';
-import 'package:zenshop/features/shop/screens/product_reviews/widgets/user_review_card.dart';
-import 'package:zenshop/utils/constants/sizes.dart';
-import '../../../../common/widgets/products/ratings/rating_indicator.dart';
 
-class ProductReviewScreen extends StatelessWidget {
-  const ProductReviewScreen({super.key});
+import '../../../../common/widgets/appbar/appbar.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../../controllers/dummy_data.dart';
+import 'widgets/progress_indicator_and_rating.dart';
+import 'widgets/rating_star.dart';
+import 'widgets/review_details_container.dart';
+
+class ProductReviewsScreen extends StatelessWidget {
+  const ProductReviewsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /// - appbar
-      appBar:
-          const TAppBar(title: Text('Reviews & Ratings'), showBackArrow: true),
+      /// -- Appbar
+      appBar: const TAppBar(title: Text('Reviews & Ratings'), showBackArrow: true),
 
-      ///  --body
+      /// -- Body
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                  "Ratings and reviews are verified and are from people who use the same type of device that you use."),
+              /// -- Reviews List
+              const Text("Ratings and reviews are verified and are from people who use the same type of device that you use."),
               const SizedBox(height: TSizes.spaceBtwItems),
 
-              ///overall product ratings
+              /// Overall Product Ratings
               const TOverallProductRating(),
               const TRatingBarIndicator(rating: 3.5),
-              Text('12,343', style: Theme.of(context).textTheme.bodySmall),
+              const Text("12,611"),
               const SizedBox(height: TSizes.spaceBtwSections),
 
-              ///user review list
-              const UserReviewCard(),
-              const UserReviewCard(),
-              const UserReviewCard(),
-              const UserReviewCard(),
+              /// User Reviews List
+              ListView.separated(
+                shrinkWrap: true,
+                itemCount: TDummyData.productReviews.length,
+                physics: const NeverScrollableScrollPhysics(),
+                separatorBuilder: (_, __) => const SizedBox(height: TSizes.spaceBtwSections),
+                itemBuilder: (_, index) => UserReviewCard(productReview: TDummyData.productReviews[index]),
+              )
             ],
           ),
         ),

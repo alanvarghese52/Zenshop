@@ -1,35 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:zenshop/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:zenshop/common/widgets/texts/section_heading.dart';
-import 'package:zenshop/utils/constants/colors.dart';
-import 'package:zenshop/utils/constants/image_strings.dart';
+import 'package:get/get.dart';
+
+import '../../../../../common/widgets/custom_shapes/containers/rounded_container.dart';
+import '../../../../../common/widgets/texts/section_heading.dart';
+import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
+import '../../../controllers/checkout_controller.dart';
 
 class TBillingPaymentSection extends StatelessWidget {
-  const TBillingPaymentSection({super.key});
+  const TBillingPaymentSection({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final dark = THelperFunctions.isDarkMode(context);
+    final controller = CheckoutController.instance;
     return Column(
       children: [
-        TSectionHeading(title: 'Payment Method', buttonTitle: 'Change', onPressed:(){}),
-        const SizedBox(height: TSizes.spaceBtwItems/2),
-        Row(
-          children: [
-            TRoundedContainer(
-              width: 60,
-              height: 35,
-              backgroundColor: dark ? TColors.light :TColors.white,
-              padding: const EdgeInsets.all(TSizes.sm),
-              child: const Image(image: AssetImage(TImages.paypal), fit: BoxFit.contain),
-            ),
-            const SizedBox(height: TSizes.spaceBtwItems/2),
-            Text('Paypal', style: Theme.of(context).textTheme.bodyLarge),
-          ],
+        TSectionHeading(
+          title: 'Payment Method',
+          buttonTitle: 'Change',
+          showActionButton: true,
+          onPressed: () {
+            controller.selectPaymentMethod(context);
+          },
+        ),
+        const SizedBox(height: TSizes.spaceBtwItems / 2),
+        Obx(
+          () => Row(
+            children: [
+              TRoundedContainer(
+                width: 60,
+                height: 35,
+                backgroundColor: THelperFunctions.isDarkMode(context) ? TColors.light : TColors.white,
+                padding: const EdgeInsets.all(TSizes.sm),
+                child: Image(image: AssetImage(controller.selectedPaymentMethod.value.image), fit: BoxFit.contain),
+              ),
+              const SizedBox(width: TSizes.spaceBtwItems / 2),
+              Text(controller.selectedPaymentMethod.value.name, style: Theme.of(context).textTheme.bodyLarge),
+            ],
+          ),
         ),
       ],
     );
   }
+
 }

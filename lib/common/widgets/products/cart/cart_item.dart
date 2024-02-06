@@ -1,59 +1,65 @@
 import 'package:flutter/material.dart';
 
+import '../../../../features/shop/models/cart_item_model.dart';
 import '../../../../utils/constants/colors.dart';
-import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/helpers/helper_functions.dart';
 import '../../images/t_rounded_image.dart';
-import '../../texts/product_title_text.dart';
 import '../../texts/t_brand_title_text_with_verified_icon.dart';
+import '../../texts/t_product_title_text.dart';
 
 class TCartItem extends StatelessWidget {
   const TCartItem({
     super.key,
+    required this.item,
   });
+
+  final CartItemModel item;
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
     return Row(
       children: [
-        ///image
+        /// 1 - Image
         TRoundedImage(
-            imageUrl: TImages.productImage1,
-            width: 60,
-            height: 60,
-            padding: const EdgeInsets.all(TSizes.sm),
-            backgroundColor: THelperFunctions.isDarkMode(context)
-                ? TColors.darkerGrey
-                : TColors.light),
+          width: 60,
+          height: 60,
+          isNetworkImage: true,
+          imageUrl: item.image ?? '',
+          padding: const EdgeInsets.all(TSizes.sm),
+          backgroundColor: dark ? TColors.darkerGrey : TColors.light,
+        ),
         const SizedBox(width: TSizes.spaceBtwItems),
 
-        /// title, price, size
+        /// 2 - Title, Price, & Size
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TBrandTitleWithVerifiedIcon(title: 'Nike'),
-              const Flexible(
-                child: TProductTitleText(
-                    title: 'Black sports shoe', maxLines: 1),
-              ),
+              /// Brand and Title
+              TBrandTitleWithVerifiedIcon(title: item.brandName ?? ''),
+              Flexible(child: TProductTitleText(title: item.title, maxLines: 1)),
 
-              ///attribute
+              /// Attributes
               Text.rich(
                 TextSpan(
-                  children: [
-                    TextSpan(text: 'Color', style: Theme.of(context).textTheme.bodySmall),
-                    TextSpan(text: 'Green', style: Theme.of(context).textTheme.bodyLarge),
-                    TextSpan(text: 'Size', style: Theme.of(context).textTheme.bodySmall),
-                    TextSpan(text: 'IND 8', style: Theme.of(context).textTheme.bodyLarge),
-                  ],
+                  children: (item.selectedVariation ?? {}).entries
+                      .map(
+                        (e) => TextSpan(
+                          children: [
+                            TextSpan(text: ' ${e.key} ', style: Theme.of(context).textTheme.bodySmall),
+                            TextSpan(text: '${e.value} ', style: Theme.of(context).textTheme.bodyLarge),
+                          ],
+                        ),
+                      )
+                      .toList(),
                 ),
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }

@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:zenshop/common/widgets/loaders/network_manager.dart';
-import 'package:zenshop/data/repositories/user/user_repository.dart';
-import 'package:zenshop/features/personalization/controllers/user_controller.dart';
-import 'package:zenshop/features/personalization/screens/profile/profile.dart';
-import 'package:zenshop/utils/constants/image_strings.dart';
-import 'package:zenshop/utils/popups/full_screen_loader.dart';
-import 'package:zenshop/utils/popups/loaders.dart';
+import 'package:get/get.dart';
+import '../../../data/repositories/user/user_repository.dart';
+import '../../../utils/constants/image_strings.dart';
+import '../../../utils/helpers/network_manager.dart';
+import '../../../utils/popups/full_screen_loader.dart';
+import '../../../utils/popups/loaders.dart';
+import '../screens/profile/profile.dart';
+import 'user_controller.dart';
 
-class UpdateNameController extends GetxController{
+/// Controller to manage user-related functionality.
+class UpdateNameController extends GetxController {
   static UpdateNameController get instance => Get.find();
 
   final firstName = TextEditingController();
@@ -20,58 +18,56 @@ class UpdateNameController extends GetxController{
   final userRepository = Get.put(UserRepository());
   GlobalKey<FormState> updateUserNameFormKey = GlobalKey<FormState>();
 
-  /// init user data when home screen appears
+  /// init user data when Home Screen appears
   @override
-  void onInit(){
+  void onInit() {
     initializeNames();
     super.onInit();
   }
 
-  /// fetch user record
-  Future<void> initializeNames() async{
+  /// Fetch user record
+  Future<void> initializeNames() async {
     firstName.text = userController.user.value.firstName;
     lastName.text = userController.user.value.lastName;
   }
 
   Future<void> updateUserName() async {
-    try{
-      // Start loading
+    try {
+      // Start Loading
       TFullScreenLoader.openLoadingDialog('We are updating your information...', TImages.docerAnimation);
 
-      //check internet connectivity
+      // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
-      if(!isConnected) {
+      if (!isConnected) {
         TFullScreenLoader.stopLoading();
         return;
       }
 
-      // form Validation
-      if(!updateUserNameFormKey.currentState!.validate()) {
+      // Form Validation
+      if (!updateUserNameFormKey.currentState!.validate()) {
         TFullScreenLoader.stopLoading();
         return;
       }
 
-      // update user's first & last name in the firebase firestore
-      Map<String, dynamic> name = {
-        'FirstName' : firstName.text.trim(),
-        'LastName' : lastName.text.trim()};
+      // Update user's first & last name in the Firebase Firestore
+      Map<String, dynamic> name = {'FirstName': firstName.text.trim(), 'LastName': lastName.text.trim()};
       await userRepository.updateSingleField(name);
 
-      // update the Rx User value
+      // Update the Rx User value
       userController.user.value.firstName = firstName.text.trim();
       userController.user.value.lastName = lastName.text.trim();
 
-      //remove loader
+      // Remove Loader
       TFullScreenLoader.stopLoading();
 
-      // show success message
+      // Show Success Message
       TLoaders.successSnackBar(title: 'Congratulations', message: 'Your Name has been updated.');
 
-      // move to previous screen
+      // Move to previous screen.
       Get.off(() => const ProfileScreen());
-      } catch (e){
+    } catch (e) {
       TFullScreenLoader.stopLoading();
-      TLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     }
   }
 }

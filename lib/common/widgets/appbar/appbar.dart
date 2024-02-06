@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:zenshop/utils/constants/colors.dart';
-import 'package:zenshop/utils/device/device_utility.dart';
-import 'package:zenshop/utils/helpers/helper_functions.dart';
 
+import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
+import '../../../utils/device/device_utility.dart';
+import '../../../utils/helpers/helper_functions.dart';
 
 class TAppBar extends StatelessWidget implements PreferredSizeWidget {
+  /// Custom appbar for achieving a desired design goal.
+  /// - Set [title] for a custom title.
+  /// - [showBackArrow] to toggle the visibility of the back arrow.
+  /// - [leadingIcon] for a custom leading icon.
+  /// - [leadingOnPressed] callback for the leading icon press event.
+  /// - [actions] for adding a list of action widgets.
+  /// - Horizontal padding of the appbar can be customized inside this widget.
   const TAppBar({
     super.key,
     this.title,
@@ -31,14 +38,10 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         automaticallyImplyLeading: false,
         leading: showBackArrow
-            ? IconButton(
-                onPressed: () => Get.back(),
-                icon: Icon(Iconsax.arrow_left,
-                    color: dark ? TColors.white : TColors.dark))
+            ? IconButton(onPressed: () => Get.back(), icon: Icon(Iconsax.arrow_left, color: dark ? TColors.white : TColors.dark))
             : leadingIcon != null
-                ? IconButton(
-                    onPressed: leadingOnPressed, icon: Icon(leadingIcon))
-                : null,
+            ? IconButton(onPressed: leadingOnPressed, icon: Icon(leadingIcon))
+            : null,
         title: title,
         actions: actions,
       ),
@@ -46,7 +49,5 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-
-  /// Todo : implement preferredsize
   Size get preferredSize => Size.fromHeight(TDeviceUtils.getAppBarHeight());
 }

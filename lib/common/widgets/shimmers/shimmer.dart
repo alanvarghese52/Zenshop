@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import 'package:zenshop/utils/constants/colors.dart';
-import 'package:zenshop/utils/helpers/helper_functions.dart';
+import '../../../utils/constants/colors.dart';
+import '../../../utils/helpers/helper_functions.dart';
 
 class TShimmerEffect extends StatelessWidget {
   const TShimmerEffect({
-      Key? key,
-      required this.width,
-      required this.height,
-      this.radius =15,
-      this.color,
+    Key? key,
+    required this.width,
+    required this.height,
+    this.radius = 15,
+    this.color,
   }) : super(key: key);
 
   final double width, height, radius;

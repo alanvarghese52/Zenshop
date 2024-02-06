@@ -21,7 +21,6 @@ class TFormatter {
     return phoneNumber;
   }
 
-
   // Not fully tested.
   static String internationalFormatPhoneNumber(String phoneNumber) {
     // Remove any non-digit characters from the phone number
@@ -53,14 +52,4 @@ class TFormatter {
 
     return formattedNumber.toString();
   }
-
-
-
-
 }
-
-
-/*
-*
-*
-* */

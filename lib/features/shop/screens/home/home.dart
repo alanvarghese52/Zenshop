@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:zenshop/common/widgets/shimmers/vertical_product_shimmer.dart';
-import 'package:zenshop/features/shop/screens/all_products/all_products.dart';
-import 'package:zenshop/features/shop/screens/home/widgets/home_appbar.dart';
-import 'package:zenshop/features/shop/screens/home/widgets/home_categories.dart';
-import 'package:zenshop/features/shop/screens/home/widgets/promo_slider.dart';
-import 'package:zenshop/utils/constants/sizes.dart';
+
 import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
-import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
 import '../../../../common/widgets/layouts/grid_layout.dart';
 import '../../../../common/widgets/products/product_cards/product_card_vertical.dart';
+import '../../../../common/widgets/shimmers/vertical_product_shimmer.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
-import '../../controllers/product_controller.dart';
+import '../../../../data/repositories/product/product_repository.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../../../../utils/constants/text_strings.dart';
+import '../../../../utils/device/device_utility.dart';
+import '../../controllers/product/product_controller.dart';
+import '../all_products/all_products.dart';
+import 'widgets/header_categories.dart';
+import 'widgets/header_search_container.dart';
+import 'widgets/home_appbar.dart';
+import 'widgets/promo_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,71 +27,72 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            /// header
+            /// Header
             const TPrimaryHeaderContainer(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ///Appbar
+                  /// -- Appbar
                   THomeAppBar(),
                   SizedBox(height: TSizes.spaceBtwSections),
 
-                  ///searchbar
-                  TSearchContainer(text: 'Search in Store'),
+                  /// -- Searchbar
+                  TSearchContainer(text: 'Search in Store', showBorder: false),
                   SizedBox(height: TSizes.spaceBtwSections),
 
-                  ///categories
-                  Padding(
-                    padding: EdgeInsets.only(left: TSizes.defaultSpace),
-                    child: Column(
-                      children: [
-                        TSectionHeading(
-                          title: 'Popular Categories',
-                          showActionButton: false,
-                          textColor: Colors.white,
-                        ),
-                        SizedBox(height: TSizes.spaceBtwItems),
-
-                        /// categories
-                        THomeCategories(),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: TSizes.spaceBtwSections),
+                  /// -- Categories
+                  THeaderCategories(),
+                  SizedBox(height: TSizes.spaceBtwSections * 2),
                 ],
               ),
             ),
 
-            ///Body
-            Padding(
+            /// -- Body
+            Container(
               padding: const EdgeInsets.all(TSizes.defaultSpace),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  /// - promo slider
+                  /// -- Promo Slider 1
                   const TPromoSlider(),
                   const SizedBox(height: TSizes.spaceBtwSections),
 
-                  ///- heading
+                  /// -- Products Heading
                   TSectionHeading(
-                      title: 'Popular Products',
-                      onPressed: () => Get.to(() => const AllProducts())),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                    title: TTexts.popularProducts,
+                    onPressed: () => Get.to(
+                      () => AllProducts(
+                        title: TTexts.popularProducts,
+                        futureMethod: ProductRepository.instance.getAllFeaturedProducts(),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: TSizes.spaceBtwItems),
 
-                  /// -- popular products
-                  Obx(() {
-                    if(controller.isLoading.value) return const TVerticalProductShimmer();
+                  /// Products Section
+                  Obx(
+                    () {
+                      // Display loader while products are loading
+                      if (controller.isLoading.value) return const TVerticalProductShimmer();
 
-                    if(controller.featuredProducts.isEmpty){
-                      return Center(child: Text('No data found!', style: Theme.of(context).textTheme.bodyMedium));
-                    }
+                      // Check if no featured products are found
+                      if (controller.featuredProducts.isEmpty) {
+                        return Center(child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium));
+                      } else {
+                        // Featured Products Found! 🎊
+                        return TGridLayout(
+                          itemCount: controller.featuredProducts.length,
+                          itemBuilder: (_, index) =>
+                              TProductCardVertical(product: controller.featuredProducts[index], isNetworkImage: true),
+                        );
+                      }
+                    },
+                  ),
 
-                    return TGridLayout(
-                        itemCount: controller.featuredProducts.length,
-                        itemBuilder: (_, index) => TProductCardVertical(product: controller.featuredProducts[index]),
-                    );
-                  }),
+                  SizedBox(height: TDeviceUtils.getBottomNavigationBarHeight() + TSizes.defaultSpace),
                 ],
               ),
-            ),
+            )
           ],
         ),
       ),

@@ -1,34 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:zenshop/common/widgets/appbar/appbar.dart';
-import 'package:zenshop/features/shop/screens/cart/widgets/cart_items.dart';
-import 'package:zenshop/features/shop/screens/checkout/checkout.dart';
-import 'package:zenshop/utils/constants/sizes.dart';
+
+import '../../../../common/widgets/appbar/appbar.dart';
+import '../../../../common/widgets/loaders/animation_loader.dart';
+import '../../../../home_menu.dart';
+import '../../../../utils/constants/image_strings.dart';
+import '../../../../utils/constants/sizes.dart';
+import '../../controllers/product/cart_controller.dart';
+import '../checkout/checkout.dart';
+import 'widgets/cart_items.dart';
 
 class CartScreen extends StatelessWidget {
-  const CartScreen({super.key});
+  const CartScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = CartController.instance;
+    final cartItems = controller.cartItems;
     return Scaffold(
-      appBar: TAppBar(
-        showBackArrow: true,
-        title: Text('Cart', style: Theme.of(context).textTheme.headlineSmall),
-      ),
-      body: const Padding(
-        padding: EdgeInsets.all(TSizes.defaultSpace),
+      /// -- AppBar
+      appBar: TAppBar(showBackArrow: true, title: Text('Cart', style: Theme.of(context).textTheme.headlineSmall)),
+      body: Obx(() {
+        /// Nothing Found Widget
+        final emptyWidget = TAnimationLoaderWidget(
+          text: 'Whoops! Cart is EMPTY.',
+          animation: TImages.cartAnimation,
+          showAction: true,
+          actionText: 'Let\'s fill it',
+          onActionPressed: () => Get.off(() => const HomeMenu()),
+        );
 
-        /// item in cart
-        child: TCartItems(),
-      ),
+        /// Cart Items
+        return cartItems.isEmpty
+            ? emptyWidget
+            : const SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(TSizes.defaultSpace),
 
-      /// checkout button
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(TSizes.defaultSpace),
-        child: ElevatedButton(
-          onPressed: () => Get.to(() => const CheckoutScreen()),
-          child: const Text('Checkout  ₹1500.0 '),
-        ),
+                  /// -- Items in Cart
+                  child: TCartItems(),
+                ),
+              );
+      }),
+
+      /// -- Checkout Button
+      bottomNavigationBar: Obx(
+        () {
+          return cartItems.isNotEmpty
+              ? Padding(
+                  padding: const EdgeInsets.all(TSizes.defaultSpace),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () => Get.to(() => const CheckoutScreen()),
+                      child: Obx(() => Text('Checkout ${controller.totalCartPrice.value}')),
+                    ),
+                  ),
+                )
+              : const SizedBox();
+        },
       ),
     );
   }
