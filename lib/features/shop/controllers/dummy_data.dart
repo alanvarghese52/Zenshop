@@ -30,16 +30,16 @@ class TDummyData {
 
   /// -- User
   static final UserModel user = UserModel(
-    firstName: 'Coding',
-    lastName: 'with T',
-    email: 'support@codingwithT.com',
-    phoneNumber: '+14155552671',
+    firstName: 'Alan',
+    lastName: 'Varghese',
+    email: 'alanvarghese1000@gmail.com',
+    phoneNumber: '+919207855783',
     profilePicture: TImages.user,
     addresses: [
       AddressModel(
         id: '1',
-        name: 'Coding with T',
-        phoneNumber: '+923178059528',
+        name: 'Alan Varghese',
+        phoneNumber: '+919988776655',
         street: '82356 Timmy Coves',
         city: 'South Liana',
         state: 'Maine',

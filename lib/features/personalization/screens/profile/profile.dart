@@ -62,7 +62,7 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: TSizes.spaceBtwItems),
               TProfileMenu(onPressed: () {}, title: 'User ID', value: '45689', icon: Iconsax.copy),
               TProfileMenu(onPressed: () {}, title: 'E-mail', value: controller.user.value.email),
-              TProfileMenu(onPressed: () {}, title: 'Phone Number', value: controller.user.value.phoneNumber),
+              TProfileMenu(onPressed: ()  {}, title: 'Phone Number', value: controller.user.value.phoneNumber),
               TProfileMenu(onPressed: () {}, title: 'Gender', value: 'Male'),
               TProfileMenu(onPressed: () {}, title: 'Date of Birth', value: '1 Jan, 1900'),
               const Divider(),
